@@ -1,4 +1,8 @@
-export default function Form() {
+type Param = {
+  setVerdadeiro:(a: boolean) => void;
+};
+
+export default function Form({ setVerdadeiro }:Param) {
   return (
     <form>
       <label>
@@ -18,7 +22,13 @@ export default function Form() {
         <input type="text" />
       </label>
       <button name="Cadastrar" type="submit">Cadastrar</button>
-      <button name="Cancelar" type="reset">Cancelar</button>
+      <button
+        name="Cancelar"
+        onClick={ () => setVerdadeiro(false) }
+      >
+        Cancelar
+
+      </button>
     </form>
   );
 }
