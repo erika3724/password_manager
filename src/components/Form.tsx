@@ -18,7 +18,7 @@ export default function Form({ setVerdadeiro }:Param) {
       return setButton(false);
     }
     return setButton(true);
-  });
+  }, [servico, password, login]);
   return (
     <form>
       <label>
