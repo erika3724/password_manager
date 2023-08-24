@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Display from './Display';
 
 type Param = {
   setVerdadeiro:(a: boolean) => void;
@@ -19,6 +20,7 @@ export default function Form({ setVerdadeiro }:Param) {
     }
     return setButton(true);
   }, [servico, password, login]);
+
   return (
     <form>
       <label>
@@ -44,6 +46,7 @@ export default function Form({ setVerdadeiro }:Param) {
           type="password"
           onChange={ (a) => setPassword(a.target.value) }
         />
+        <Display password={ password } />
       </label>
       <label>
         URL:
