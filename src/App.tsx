@@ -20,7 +20,10 @@ function App() {
       }
       {
         renderizacao.length > 0
-          ? <Cadastro renderizacao={ renderizacao } />
+          ? <Cadastro
+              renderizacao={ renderizacao }
+              setRenderizacao={ (a:any) => setRenderizacao(a) }
+          />
           : <p>Nenhuma senha cadastrada</p>
       }
 

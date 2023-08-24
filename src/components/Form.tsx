@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import Display from './Display';
 
 type Param = {
@@ -9,6 +10,8 @@ type Param = {
 
 export default function Form({ setVerdadeiro, setRenderizacao, renderizacao }:Param) {
   const [button, setButton] = useState(true);
+  const [id, setId] = useState('');
+  const [segredo, setSegredo] = useState('password');
   const [servico, setServico] = useState('');
   const [password, setPassword] = useState('');
   const [url, setUrl] = useState('');
@@ -26,9 +29,17 @@ export default function Form({ setVerdadeiro, setRenderizacao, renderizacao }:Pa
 
   const funcao = (event: any) => {
     event.preventDefault();
-    const a = { URL: url, Password: password, Login: login, Servico: servico };
+    const a = { id: servico,
+      URL: url,
+      Password: password,
+      Login: login,
+      Servico: servico };
     setRenderizacao([...renderizacao, a]);
     setVerdadeiro(false);
+    Swal.fire({
+      title: 'Serviço cadastrado com sucesso',
+      timer: 1500,
+    });
   };
 
   return (
@@ -52,10 +63,16 @@ export default function Form({ setVerdadeiro, setRenderizacao, renderizacao }:Pa
       <label>
         Senha:
         <input
+          data-testid="show-hide-form-password"
           name="password"
-          type="password"
+          type={ segredo }
           onChange={ (a) => setPassword(a.target.value) }
+          onClick={ () => {
+            if (segredo === 'password') return setSegredo('text');
+            if (segredo === 'text') return setSegredo('password');
+          } }
         />
+
         <Display password={ password } />
       </label>
       <label>
