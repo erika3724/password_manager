@@ -10,7 +10,6 @@ type Param = {
 
 export default function Form({ setVerdadeiro, setRenderizacao, renderizacao }:Param) {
   const [button, setButton] = useState(true);
-  const [id, setId] = useState('');
   const [segredo, setSegredo] = useState('password');
   const [servico, setServico] = useState('');
   const [password, setPassword] = useState('');
