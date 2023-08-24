@@ -13,11 +13,10 @@ export default function Display({ password }:Parametros) {
   const [param4, setParam4] = useState(invalido);
 
   useEffect(() => {
-    const p = /^(?=.*?[A-z])(?=.*?[0-9]).{0,}$/;
+    const p = /^(?=.*?[A-z])(?=.*?[0-9]).{1,}$/;
     const a = /^.{0,16}$/;
     const b = /^.{1,7}$/;
     const c = /^(?=.*?[#?!@$%^&*-]).{0,}$/;
-
     if (b.test(password)) setParam1(invalido);
     else {
       setParam1(valido);

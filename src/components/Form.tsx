@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import Display from './Display';
 
 type Param = {
-  setVerdadeiro:(a: boolean) => void;
+  setVerdadeiro:(a: boolean) => void,
+  setRenderizacao: any,
+  renderizacao: [{ URL: string, Password:string, Login: string }] | any
 };
 
-export default function Form({ setVerdadeiro }:Param) {
+export default function Form({ setVerdadeiro, setRenderizacao, renderizacao }:Param) {
   const [button, setButton] = useState(true);
   const [servico, setServico] = useState('');
   const [password, setPassword] = useState('');
+  const [url, setUrl] = useState('');
   const [login, setLogin] = useState('');
   useEffect(() => {
     const p = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/;
@@ -20,6 +23,13 @@ export default function Form({ setVerdadeiro }:Param) {
     }
     return setButton(true);
   }, [servico, password, login]);
+
+  const funcao = (event: any) => {
+    event.preventDefault();
+    const a = { URL: url, Password: password, Login: login, Servico: servico };
+    setRenderizacao([...renderizacao, a]);
+    setVerdadeiro(false);
+  };
 
   return (
     <form>
@@ -50,9 +60,17 @@ export default function Form({ setVerdadeiro }:Param) {
       </label>
       <label>
         URL:
-        <input type="text" />
+        <input type="text" onChange={ (a) => setUrl(a.target.value) } />
       </label>
-      <button name="Cadastrar" disabled={ button } type="submit">Cadastrar</button>
+      <button
+        name="Cadastrar"
+        disabled={ button }
+        onClick={ (a) => funcao(a) }
+        type="submit"
+      >
+        Cadastrar
+
+      </button>
       <button
         name="Cancelar"
         onClick={ () => setVerdadeiro(false) }
